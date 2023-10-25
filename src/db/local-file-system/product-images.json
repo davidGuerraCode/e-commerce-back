@@ -1,0 +1,12 @@
+[
+  {
+    "id": "4f23",
+    "productId": "4f6e7c1d-5d49-47c7-b8b1-60d8760e259d",
+    "images": [
+      "https://example.com/product1/image1.jpg",
+      "https://example.com/product1/image2.jpg",
+      "https://example.com/product1/image3.jpg"
+    ],
+    "thumbnails": ["https://example.com/product1/thumbnail.jpg"]
+  }
+]

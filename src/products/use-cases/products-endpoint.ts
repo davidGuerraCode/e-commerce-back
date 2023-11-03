@@ -4,6 +4,7 @@ import {
   UniqueConstraintError,
 } from '../../libs/errors';
 import makeHttpError from '../../libs/http-error';
+import validateImage from '../../libs/validate-image';
 import type { Product } from '../../types';
 import type { HttpRequest } from '../../types/http-request';
 import makeProduct from '../dtos/products';
@@ -69,6 +70,16 @@ export default function makeProductsEndpointHandler({
     }
 
     try {
+      if (!httpRequest.file) {
+        return makeHttpError({
+          statusCode: 400,
+          errorMessage: 'Bad request. No image file.',
+        });
+      }
+      console.log('[=>]', httpRequest.file);
+
+      await validateImage(httpRequest.file.buffer);
+
       const newProduct = makeProduct(productData as Product);
       const result = await productList.add(newProduct);
 

@@ -8,5 +8,6 @@ export default function adaptRequest<T>(req: Request): HttpRequest<T> {
     pathParams: req.params,
     queryParams: req.query,
     body: req.body,
+    file: req.file,
   });
 }

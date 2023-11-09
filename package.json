@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "tsc",
-    "build": "cp -r src/db/local-file-system/*.json dist/ && esbuild src/index.ts --bundle --packages=external --platform=node --format=esm --outfile=dist/index.js",
+    "build": "shx cp -r src/db/local-file-system/*.json dist/ && esbuild src/index.ts --bundle --packages=external --platform=node --format=esm --outfile=dist/index.js",
     "dev": "run-p dev:*",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "dev:node": "node --watch dist/index.js",
@@ -23,6 +23,7 @@
     "dotenv": "^16.3.1",
     "esbuild": "^0.19.5",
     "npm-run-all": "^4.1.5",
+    "shx": "^0.3.4",
     "typescript": "^5.2.2"
   },
   "dependencies": {

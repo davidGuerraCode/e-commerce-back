@@ -14,9 +14,9 @@ import {
 const router: Router = express.Router();
 
 router.get('/', makeExpressCallback<Product>(getProducts));
-router.get('/:pid', makeExpressCallback(getProduct));
-router.post('/', makeExpressCallback(postProduct));
-router.delete('/:pid', makeExpressCallback(removeProduct));
-router.put('/:pid', makeExpressCallback(putProduct));
+router.get('/:pid', makeExpressCallback<Product>(getProduct));
+router.post('/', makeExpressCallback<Product>(postProduct));
+router.delete('/:pid', makeExpressCallback<Product>(removeProduct));
+router.put('/:pid', makeExpressCallback<Product>(putProduct));
 
 export default router;

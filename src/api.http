@@ -10,7 +10,7 @@ Content-Type: application/json
 
 {
   "title": "Updated Product 1",
-  "description": "Updated Product 1 description",
+  "description": "Updated Product 1 description, again",
   "price": 99.00
 }
 

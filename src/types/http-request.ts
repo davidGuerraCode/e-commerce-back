@@ -4,5 +4,10 @@ export type HttpRequest<T> = {
   pathParams: Record<string, string>;
   queryParams: Record<string, any>;
   body: T | string;
-  file: File;
+  file: any;
+  headers: {
+    'Content-Type': string;
+    Referer: string;
+    'User-Agent': string;
+  };
 };

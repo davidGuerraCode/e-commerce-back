@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "tsc",
-    "build": "shx cp -r src/db/local-file-system/*.json dist/ && esbuild src/index.ts --bundle --packages=external --platform=node --format=esm --outfile=dist/index.js",
+    "build": "cp -r src/db/local-file-system/*.json dist/ && esbuild src/index.ts --bundle --packages=external --platform=node --format=esm --outfile=dist/index.js",
     "dev": "run-p dev:*",
     "dev:tsc": "tsc --watch --preserveWatchOutput",
     "dev:node": "node --watch dist/index.js",

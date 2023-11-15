@@ -16,6 +16,6 @@ router.get('/', makeExpressCallback<Cart>(getCarts));
 router.get('/:cid', makeExpressCallback<Cart>(getCart));
 router.post('/', makeExpressCallback<Cart>(postCart));
 router.delete('/', makeExpressCallback<Cart>(removeCart));
-router.put('/', makeExpressCallback<Cart>(putCart));
+router.put('/:cid/product/pid', makeExpressCallback<Cart>(putCart));
 
 export default router;

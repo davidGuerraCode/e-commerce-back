@@ -1,5 +1,5 @@
-import { cartSchema } from '../../schemas/carts';
-import type { Cart } from '../../types';
+import { cartSchema } from '../../../schemas/carts';
+import type { Cart } from '../../../types';
 
 export default function makeCart(cart: Cart) {
   const validCart = validate(cart);

@@ -1,4 +1,4 @@
-import { type Product, type ProductDb } from './../../types/index';
+import { type Product, type ProductDb } from '../../../types/index';
 export default function makeUpdateProduct({
   productDb,
 }: {

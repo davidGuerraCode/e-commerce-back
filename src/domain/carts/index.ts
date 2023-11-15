@@ -1,5 +1,5 @@
-import { loadJSONFromFile } from '../libs/read-json';
-import type { CartDb } from '../types';
+import { loadJSONFromFile } from '../../libs/read-json';
+import type { CartDb } from '../../types';
 import makeCartList from './models/carts-list.model';
 import makeCartsEndpointHandler from './use-cases/carts-endpoint';
 

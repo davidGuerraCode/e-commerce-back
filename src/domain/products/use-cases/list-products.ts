@@ -1,4 +1,4 @@
-import type { ProductDb } from '../../types';
+import type { ProductDb } from '../../../types';
 
 export default function makeListProducts({
   productDb,

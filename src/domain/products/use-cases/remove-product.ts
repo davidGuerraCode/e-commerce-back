@@ -1,4 +1,4 @@
-import { type ProductDb } from './../../types/index';
+import { type ProductDb } from '../../../types/index';
 export default function makeRemoveProduct({
   productDb,
 }: {

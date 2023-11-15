@@ -1,5 +1,5 @@
-import type { ProductDb } from '../../types';
-import { type HttpRequest } from '../../types/http-request';
+import type { ProductDb } from '../../../types';
+import { type HttpRequest } from '../../../types/http-request';
 import type { ListProducts } from '../use-cases';
 
 export default function makeGetProducts({

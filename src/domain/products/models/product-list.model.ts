@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto';
-import type { Product, ProductDb } from '../../types';
+import type { Product, ProductDb } from '../../../types';
 
 export default function makeProductList({
   database,

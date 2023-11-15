@@ -1,5 +1,5 @@
-import { loadJSONFromFile } from '../../libs/read-json';
-import type { ProductDb } from '../../types';
+import { loadJSONFromFile } from '../../../libs/read-json';
+import type { ProductDb } from '../../../types';
 import makeAddProduct from './add-product';
 import makeListProduct from './list-product';
 import makeListProducts from './list-products';

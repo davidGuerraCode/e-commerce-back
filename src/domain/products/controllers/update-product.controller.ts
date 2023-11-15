@@ -2,10 +2,10 @@ import {
   InvalidPropertyError,
   RequiredParameterError,
   UniqueConstraintError,
-} from '../../libs/errors';
-import makeHttpError from '../../libs/http-error';
-import type { Product } from '../../types';
-import type { HttpRequest } from '../../types/http-request';
+} from '../../../libs/errors';
+import makeHttpError from '../../../libs/http-error';
+import type { Product } from '../../../types';
+import type { HttpRequest } from '../../../types/http-request';
 import makeProduct from '../dtos/products';
 import type { ListProduct, UpdateProduct } from '../use-cases';
 

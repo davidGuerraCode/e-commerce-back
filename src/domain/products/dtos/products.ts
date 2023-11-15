@@ -1,5 +1,5 @@
-import { productSchema } from '../../schemas/product';
-import type { Product } from '../../types';
+import { productSchema } from '../../../schemas/product';
+import type { Product } from '../../../types';
 
 export default function makeProduct(product: Product) {
   const validProduct = validate(product);

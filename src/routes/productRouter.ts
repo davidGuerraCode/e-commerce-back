@@ -1,15 +1,15 @@
 import type { Router } from 'express';
 import express from 'express';
 
-import makeExpressCallback from '../../libs/express-callback';
-import type { Product } from '../../types';
 import {
   getProduct,
   getProducts,
   postProduct,
   putProduct,
   removeProduct,
-} from '../controllers';
+} from '../domain/products/controllers';
+import makeExpressCallback from '../libs/express-callback';
+import type { Product } from '../types';
 
 const router: Router = express.Router();
 

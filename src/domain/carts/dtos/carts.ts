@@ -1,18 +1,13 @@
-import { cartSchema } from '../../../schemas/carts';
 import type { Cart } from '../../../types';
 
-export default function makeCart(cart: Cart) {
-  const validCart = validate(cart);
+export default function buildMakeCart({
+  validate,
+}: {
+  validate: (cart: Cart) => Cart;
+}) {
+  return function makeAddCart(cart: Cart) {
+    const validCart = validate(cart);
 
-  return Object.freeze(validCart);
-
-  function validate(cart: Cart) {
-    const validatedCart = cartSchema.safeParse(cart);
-
-    if (!validatedCart.success) {
-      throw new Error(validatedCart.error.message);
-    }
-
-    return validatedCart.data;
-  }
+    return Object.freeze(validCart);
+  };
 }

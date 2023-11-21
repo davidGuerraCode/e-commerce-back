@@ -6,7 +6,7 @@ import {
 import makeHttpError from '../../../libs/http-error';
 import type { Cart } from '../../../types';
 import type { HttpRequest } from '../../../types/http-request';
-import makeCart from '../dtos/carts';
+import makeCart from '../dtos';
 import type {
   AddCart,
   ListCart,

@@ -7,7 +7,7 @@ import makeHttpError from '../../../libs/http-error';
 import validateImage from '../../../libs/validate-image';
 import type { Product } from '../../../types';
 import type { HttpRequest } from '../../../types/http-request';
-import makeProduct from '../dtos/products';
+import makeProduct from '../dtos';
 import type { AddProduct } from '../use-cases';
 
 export default function makePostProduct({ add }: { add: AddProduct }) {

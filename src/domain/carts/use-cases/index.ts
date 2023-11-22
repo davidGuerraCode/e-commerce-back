@@ -6,7 +6,7 @@ import {
   makeDeleteCart,
   makeListCart,
   makeListCarts,
-} from './carts-models';
+} from './carts.use-case';
 
 const cartDb: CartDb[] = loadJSONFromFile('./carts.json');
 

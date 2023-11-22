@@ -4,7 +4,7 @@ import {
   listCart,
   listCarts,
   updateCart,
-} from '../models';
+} from '../use-cases';
 import {
   makeDeleteCart,
   makeGetCart,

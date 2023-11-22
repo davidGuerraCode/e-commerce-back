@@ -13,7 +13,7 @@ import type {
   ListCarts,
   RemoveCart,
   UpdateCart,
-} from '../models';
+} from '../use-cases';
 
 export function makePostCart({ add }: { add: AddCart }) {
   return async function postCart(httpRequest: HttpRequest<Cart>) {

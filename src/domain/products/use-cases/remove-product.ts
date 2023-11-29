@@ -1,16 +1,11 @@
-import { type ProductDb } from '../../../types/index';
+import type { ProductsDb } from '../models';
+
 export default function makeRemoveProduct({
-  productDb,
+  productsDb,
 }: {
-  productDb: ProductDb[];
+  productsDb: ProductsDb;
 }) {
-  return async function remove({ productId }: { productId: string }) {
-    const productIdx = productDb.findIndex(product => product.id === productId);
-
-    if (productIdx === -1) return false;
-
-    productDb.splice(productIdx, 1);
-
-    return true;
+  return async function removeProduct({ productId }: { productId: string }) {
+    return productsDb.remove({ productId });
   };
 }

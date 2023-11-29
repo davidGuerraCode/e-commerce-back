@@ -1,15 +1,11 @@
-import type { ProductDb } from '../../../types';
+import type { ProductsDb } from '../models';
 
 export default function makeListProducts({
-  productDb,
+  productsDb,
 }: {
-  productDb: ProductDb[];
+  productsDb: ProductsDb;
 }) {
-  return async function findAll({ limit }: { limit: number }) {
-    if (limit) {
-      return productDb.slice(0, limit);
-    }
-
-    return productDb;
+  return async function listProducts({ limit }: { limit: number }) {
+    return productsDb.findAll({ limit });
   };
 }

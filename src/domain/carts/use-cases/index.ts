@@ -1,5 +1,4 @@
-import { loadJSONFromFile } from '../../../libs/read-json';
-import type { CartDb } from '../../../types';
+import cartsDb from '../models';
 import {
   makeAddCart,
   makeAddToCart,
@@ -8,13 +7,11 @@ import {
   makeListCarts,
 } from './carts.use-case';
 
-const cartDb: CartDb[] = loadJSONFromFile('./carts.json');
-
-const addCart = makeAddCart({ cartDb });
-const updateCart = makeAddToCart({ cartDb });
-const listCarts = makeListCarts({ cartDb });
-const listCart = makeListCart({ cartDb });
-const deleteCart = makeDeleteCart({ cartDb });
+const addCart = makeAddCart({ cartsDb });
+const updateCart = makeAddToCart({ cartsDb });
+const listCarts = makeListCarts({ cartsDb });
+const listCart = makeListCart({ cartsDb });
+const deleteCart = makeDeleteCart({ cartsDb });
 
 const cartModel = Object.freeze({
   addCart,

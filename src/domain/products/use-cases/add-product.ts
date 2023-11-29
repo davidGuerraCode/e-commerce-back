@@ -1,18 +1,17 @@
-import { randomUUID } from 'node:crypto';
-import { type Product, type ProductDb } from '../../../types/index';
+import { type Product } from '../../../types/index';
+import type { ProductsDb } from '../models';
 
 export default function makeAddProduct({
-  productDb,
+  productsDb,
 }: {
-  productDb: ProductDb[];
+  productsDb: ProductsDb;
 }) {
   return async function addProduct({ productData }: { productData: Product }) {
     const newProduct = {
       ...productData,
-      id: randomUUID(),
     };
 
-    productDb.push(newProduct);
+    await productsDb.insert({ product: newProduct });
 
     return newProduct;
   };

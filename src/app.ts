@@ -1,10 +1,8 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import express from 'express';
 import logger from 'morgan';
 import cartRouter from './routes/cartRouter';
 import productRouter from './routes/productRouter';
-
-dotenv.config();
 
 const app = express();
 const apiRoot = process.env.API_BASE_URL ?? '/api';

@@ -1,13 +1,11 @@
-import type { ProductDb } from '../../../types';
+import type { ProductsDb } from '../models';
 
 export default function makeListProduct({
-  productDb,
+  productsDb,
 }: {
-  productDb: ProductDb[];
+  productsDb: ProductsDb;
 }) {
-  return async function findById({ productId }: { productId: string }) {
-    const result = productDb.find(product => product.id === productId);
-
-    return result ? result : null;
+  return async function listProduct({ productId }: { productId: string }) {
+    return productsDb.findById({ productId });
   };
 }

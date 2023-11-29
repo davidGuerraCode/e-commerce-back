@@ -1,8 +1,10 @@
-import { type Product, type ProductDb } from '../../../types/index';
+import { type Product } from '../../../types/index';
+import type { ProductsDb } from '../models';
+
 export default function makeUpdateProduct({
-  productDb,
+  productsDb,
 }: {
-  productDb: ProductDb[];
+  productsDb: ProductsDb;
 }) {
   return async function updateProduct({
     productId,
@@ -11,21 +13,6 @@ export default function makeUpdateProduct({
     productId: string;
     changes: Product;
   }) {
-    const productIdx = productDb.findIndex(product => product.id === productId);
-
-    if (productIdx === -1) return null;
-
-    const currentProduct = productDb[productIdx];
-
-    if (!currentProduct) return null;
-
-    const updatedProduct = {
-      ...currentProduct,
-      ...changes,
-    };
-
-    productDb[productIdx] = updatedProduct;
-
-    return updatedProduct;
+    return productsDb.update({ productId, changes });
   };
 }

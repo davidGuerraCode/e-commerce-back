@@ -153,8 +153,7 @@ export function makeGetCarts({ findAll }: { findAll: ListCarts }) {
     };
 
     try {
-      const { limit } = httpRequest.queryParams || {};
-      const result = await findAll({ limit });
+      const result = await findAll();
 
       return {
         headers,

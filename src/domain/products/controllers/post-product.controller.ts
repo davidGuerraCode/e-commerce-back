@@ -49,9 +49,7 @@ export default function makePostProduct({ add }: { add: AddProduct }) {
       const result = await add({ productData: newProduct });
 
       return {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         statusCode: 201,
         data: JSON.stringify(result),
       };

@@ -1,38 +1,25 @@
-import { randomUUID } from 'crypto';
-import type { Cart, CartDb } from '../../../types';
+import type { Cart } from '../../../types';
+import type { CartsDb } from '../models';
 
-export function makeListCarts({ cartDb }: { cartDb: CartDb[] }) {
-  return async function findAll({ limit }: { limit: number }) {
-    if (limit) {
-      return cartDb.slice(0, limit);
-    }
-
-    return cartDb;
+export function makeListCarts({ cartsDb }: { cartsDb: CartsDb }) {
+  return async function listCarts() {
+    return await cartsDb.findAll();
   };
 }
 
-export function makeListCart({ cartDb }: { cartDb: CartDb[] }) {
-  return async function findById({ cartId }: { cartId: string }) {
-    const result = cartDb.find(cart => cart.id === cartId);
-
-    return result ? result : null;
+export function makeListCart({ cartsDb }: { cartsDb: CartsDb }) {
+  return async function listCart({ cartId }: { cartId: string }) {
+    return await cartsDb.findById({ cartId });
   };
 }
 
-export function makeAddCart({ cartDb }: { cartDb: CartDb[] }) {
-  return async function add(cart: Cart) {
-    const newCart = {
-      ...cart,
-      id: randomUUID(),
-    };
-
-    cartDb.push(newCart);
-
-    return newCart;
+export function makeAddCart({ cartsDb }: { cartsDb: CartsDb }) {
+  return async function addCart(cart: Cart) {
+    return await cartsDb.insert({ cart });
   };
 }
 
-export function makeAddToCart({ cartDb }: { cartDb: CartDb[] }) {
+export function makeAddToCart({ cartsDb }: { cartsDb: CartsDb }) {
   return async function addToCart({
     cartId,
     productId,
@@ -42,37 +29,12 @@ export function makeAddToCart({ cartDb }: { cartDb: CartDb[] }) {
     productId: string;
     changes: Cart;
   }) {
-    const currentCartIdx = cartDb.findIndex(cart => cart.id === cartId);
-    const currentCart = cartDb[currentCartIdx];
-
-    if (!productId || !currentCart || currentCartIdx === -1) return null;
-
-    const productAlreadyInCartIdx = currentCart.products.findIndex(
-      product => product.productId === productId
-    );
-
-    if (productAlreadyInCartIdx === -1) return null;
-
-    const currentProductInCart = currentCart.products[productAlreadyInCartIdx];
-
-    if (!currentProductInCart) {
-      currentCart.products = changes.products;
-    } else {
-      currentProductInCart.quantity += 1;
-    }
-
-    return currentCart;
+    /* Check how to update just the quantity if there is already a cart created and the same product is added to it */
   };
 }
 
-export function makeDeleteCart({ cartDb }: { cartDb: CartDb[] }) {
-  return async function remove({ cartId }: { cartId: string }) {
-    const cartIndex = cartDb.findIndex(cart => cart.id === cartId);
-
-    if (cartIndex === -1) return null;
-
-    const deletedCart = cartDb.splice(cartIndex, 1);
-
-    return deletedCart;
+export function makeDeleteCart({ cartsDb }: { cartsDb: CartsDb }) {
+  return async function deleteCart({ cartId }: { cartId: string }) {
+    return await cartsDb.remove({ cartId });
   };
 }

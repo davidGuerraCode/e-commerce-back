@@ -108,16 +108,31 @@ export function makePutCart({
         });
       }
 
-      const newCart = makeCart({
-        ...existingCart,
-        products: [
-          ...existingCart.products,
-          {
-            productId: newProduct.productId,
-            quantity: newProduct.quantity,
-          },
-        ],
-      });
+      const productAlreadyInCartIdx = existingCart.products.findIndex(
+        product => product.productId === newProduct.productId
+      );
+      let newCart: Cart;
+
+      if (productAlreadyInCartIdx >= 0) {
+        existingCart!.products![productAlreadyInCartIdx]!.quantity +=
+          newProduct.quantity;
+
+        newCart = makeCart({
+          ...existingCart,
+        });
+      } else {
+        newCart = makeCart({
+          ...existingCart,
+          products: [
+            ...existingCart.products,
+            {
+              productId: newProduct.productId,
+              quantity: newProduct.quantity,
+            },
+          ],
+        });
+      }
+
       const result = await update({
         cartId: cid,
         productId: pid,
@@ -129,7 +144,11 @@ export function makePutCart({
           'Content-Type': 'application/json',
         },
         statusCode: 200,
-        data: JSON.stringify(result),
+        data: JSON.stringify({
+          success: true,
+          message: 'Product updated successfully!',
+          data: result?.acknowledged ? newCart : null,
+        }),
       };
     } catch (error) {
       return makeHttpError({

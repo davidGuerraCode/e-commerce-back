@@ -42,10 +42,9 @@ export default function makeCartsDb({ db }: { db: CartsCollection }) {
     cartId: string;
     changes: Cart;
   }) {
-    const result = await db.findOneAndUpdate(
+    const result = await db.updateOne(
       { _id: new ObjectId(cartId) },
-      { $set: changes },
-      { returnDocument: 'after' }
+      { $set: changes }
     );
 
     if (!result) return null;

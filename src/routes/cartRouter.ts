@@ -15,7 +15,7 @@ const router: Router = express.Router();
 router.get('/', makeExpressCallback<Cart>(getCarts));
 router.get('/:cid', makeExpressCallback<Cart>(getCart));
 router.post('/', makeExpressCallback<Cart>(postCart));
-router.delete('/', makeExpressCallback<Cart>(removeCart));
-router.put('/:cid/product/pid', makeExpressCallback<Cart>(putCart));
+router.delete('/:cid', makeExpressCallback<Cart>(removeCart));
+router.put('/:cid/product/:pid', makeExpressCallback<Cart>(putCart));
 
 export default router;

@@ -29,7 +29,7 @@ export function makeAddToCart({ cartsDb }: { cartsDb: CartsDb }) {
     productId: string;
     changes: Cart;
   }) {
-    /* Check how to update just the quantity if there is already a cart created and the same product is added to it */
+    return await cartsDb.update({ cartId, changes });
   };
 }
 

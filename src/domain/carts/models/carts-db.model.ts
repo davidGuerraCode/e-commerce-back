@@ -12,13 +12,88 @@ export default function makeCartsDb({ db }: { db: CartsCollection }) {
   });
 
   async function findAll() {
-    return await db.find().toArray();
+    return await db
+      .aggregate([
+        { $unwind: '$products' },
+        {
+          $lookup: {
+            from: 'Products',
+            localField: 'products.productId',
+            foreignField: '_id',
+            as: 'productDetails',
+          },
+        },
+        {
+          $addFields: {
+            'products.productDetails': { $arrayElemAt: ['$productDetails', 0] },
+          },
+        },
+        {
+          $group: {
+            _id: '$_id',
+            products: { $push: '$products' },
+          },
+        },
+      ])
+      .toArray();
   }
 
   async function findById({ cartId }: { cartId: string }) {
     if (!cartId) return null;
 
-    return await db.findOne({ _id: new ObjectId(cartId) });
+    const cart = await db.findOne({ _id: new ObjectId(cartId) });
+
+    if (!cart) return null;
+
+    return await db
+      .aggregate([
+        {
+          $match: { _id: cart._id },
+        },
+        {
+          $lookup: {
+            from: 'Products',
+            let: {
+              productIds: '$products.productId',
+              quantities: '$products.quantity',
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $in: ['$_id', '$$productIds'] },
+                },
+              },
+              {
+                $addFields: {
+                  quantity: {
+                    $arrayElemAt: [
+                      '$$quantities',
+                      { $indexOfArray: ['$$productIds', '$_id'] },
+                    ],
+                  },
+                },
+              },
+              {
+                $project: {
+                  _id: 1,
+                  title: 1,
+                  description: 1,
+                  code: 1,
+                  price: 1,
+                  status: 1,
+                  stock: 1,
+                  category: 1,
+                  images: 1,
+                  thumbnail: 1,
+                  quantity: 1,
+                },
+              },
+            ],
+            as: 'products',
+          },
+        },
+      ])
+      .toArray();
   }
 
   async function insert({ cart }: { cart: Cart }) {

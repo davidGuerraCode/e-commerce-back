@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
 import type { CartsCollection } from '.';
-import type { Cart } from '../../../types';
+import type { Cart, CartAggregateResult } from '../../../types';
 
 export default function makeCartsDb({ db }: { db: CartsCollection }) {
   return Object.freeze({
@@ -45,7 +45,7 @@ export default function makeCartsDb({ db }: { db: CartsCollection }) {
 
     if (!cart) return null;
 
-    return await db
+    const result = await db
       .aggregate([
         {
           $match: { _id: cart._id },
@@ -75,7 +75,8 @@ export default function makeCartsDb({ db }: { db: CartsCollection }) {
               },
               {
                 $project: {
-                  _id: 1,
+                  _id: 0,
+                  productId: '$_id',
                   title: 1,
                   description: 1,
                   code: 1,
@@ -94,6 +95,8 @@ export default function makeCartsDb({ db }: { db: CartsCollection }) {
         },
       ])
       .toArray();
+
+    return result[0] as CartAggregateResult;
   }
 
   async function insert({ cart }: { cart: Cart }) {

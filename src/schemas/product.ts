@@ -10,4 +10,5 @@ export const productSchema = z.object({
   category: z.string(),
   images: z.array(z.string()),
   thumbnail: z.string().optional(),
+  quantity: z.number().int().positive().default(0),
 });

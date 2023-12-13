@@ -6,3 +6,11 @@ export type Product = z.infer<typeof productSchema>;
 export type ProductDb = Product & { id: string };
 export type Cart = z.infer<typeof cartSchema>;
 export type CartDb = Cart & { id: string };
+export type ProductAggregateResult = Product & {
+  productId: string;
+  quantity: number;
+};
+export type CartAggregateResult = {
+  id: string;
+  products: ProductAggregateResult[];
+};

@@ -5,7 +5,17 @@ export default function makeListProducts({
 }: {
   productsDb: ProductsDb;
 }) {
-  return async function listProducts({ limit }: { limit: number }) {
-    return productsDb.findAll({ limit });
+  return async function listProducts({
+    limit = 10,
+    page = 1,
+    query,
+    sort,
+  }: {
+    limit: number;
+    page: number;
+    query?: string;
+    sort?: string;
+  }) {
+    return productsDb.findAll({ limit, sort });
   };
 }

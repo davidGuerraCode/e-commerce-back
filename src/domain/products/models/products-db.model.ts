@@ -11,12 +11,13 @@ export default function makeProductsDb({ db }: { db: ProductsCollection }) {
     update,
   });
 
-  async function findAll({ limit }: { limit?: number }) {
-    if (limit) {
-      return await db.find().limit(limit).toArray();
-    }
+  async function findAll({ limit, sort }: { limit: number; sort?: string }) {
+    let sortQuery = {};
 
-    return await db.find().toArray();
+    if (sort === 'asc') sortQuery = { price: 1 };
+    else if (sort === 'desc') sortQuery = { price: -1 };
+
+    return await db.find().limit(+limit).sort(sortQuery).toArray();
   }
 
   async function findById({ productId }: { productId: string }) {

@@ -13,8 +13,8 @@ export default function makeGetProducts({
     };
 
     try {
-      const { limit } = httpRequest.queryParams || {};
-      const result = await listProducts({ limit });
+      const { limit, page, query, sort } = httpRequest.queryParams || {};
+      const result = await listProducts({ limit, page, query, sort });
 
       return {
         headers,

@@ -14,3 +14,15 @@ export type CartAggregateResult = {
   id: string;
   products: ProductAggregateResult[];
 };
+export type SuccessResponse<T> = {
+  status: true;
+  payload: T;
+  totalPages: number;
+  prevPage: number | null;
+  nextPage: number | null;
+  page: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+  prevLink: string | null;
+  nextLink: string | null;
+};

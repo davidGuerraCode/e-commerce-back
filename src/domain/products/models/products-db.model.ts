@@ -9,6 +9,7 @@ export default function makeProductsDb({ db }: { db: ProductsCollection }) {
     findById,
     findAll,
     update,
+    count,
   });
 
   async function findAll({ limit, sort }: { limit: number; sort?: string }) {
@@ -58,5 +59,9 @@ export default function makeProductsDb({ db }: { db: ProductsCollection }) {
     if (!result) return null;
 
     return result;
+  }
+
+  async function count() {
+    return await db.countDocuments();
   }
 }

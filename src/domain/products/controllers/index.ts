@@ -1,5 +1,6 @@
 import {
   addProduct,
+  countProducts,
   deleteProduct,
   listProduct,
   listProducts,
@@ -11,7 +12,7 @@ import makeGetProducts from './get-products.controller';
 import makePostProduct from './post-product.controller';
 import makeUpdateProduct from './update-product.controller';
 
-const getProducts = makeGetProducts({ listProducts });
+const getProducts = makeGetProducts({ listProducts, countProducts });
 const getProduct = makeGetProduct({ listProduct });
 const removeProduct = makeRemoveProduct({ remove: deleteProduct });
 const putProduct = makeUpdateProduct({

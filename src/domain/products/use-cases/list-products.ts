@@ -6,8 +6,8 @@ export default function makeListProducts({
   productsDb: ProductsDb;
 }) {
   return async function listProducts({
-    limit = 10,
-    page = 1,
+    limit,
+    page,
     query,
     sort,
   }: {
